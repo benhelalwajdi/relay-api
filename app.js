@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -38,4 +40,12 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+
+
+//localhost:3003
+app.listen(3003, ()=>{
+    console.log("Server is up and listening on 3003...")
+})
+
 module.exports = app;
+
