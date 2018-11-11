@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var storesRouter = require('./routes/stores');
+var productsRouter = require('./routes/products');
 
 
 /* Dummy Data */
@@ -17,7 +18,7 @@ var dummyData = require('./utils/data');
 var app = express();
 
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 
 // view engine setup
@@ -34,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/stores', storesRouter);
+app.use('/products', productsRouter);
 app.use('/data', dummyData);
 
 // catch 404 and forward to error handler
