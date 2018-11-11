@@ -1,7 +1,6 @@
 var express = require('express');
 var mysql = require('mysql');
 var bcrypt = require('bcrypt-nodejs');
-
 var router = express.Router();
 
 
@@ -36,31 +35,40 @@ router.get('/user/:mail', (req, res) => {
 
 /* Create new user. */
 router.post('/create_user', (req, res) => {
-    console.log("Trying to create new user ...");
-    console.log("Email " + req.body.mail);
-    const queryString = "INSERT INTO user (mail,password) VALUES (?,?)";
     let mail = req.body.mail;
     let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
-    getConnection().query(queryString, [mail, password], (err, results, fields) => {
-        if (err) {
-            console.log("Failed to insert new user: " + err);
-            res.sendStatus(500);
-            return
+
+   if (req.body.client_type == ("CLIENT")){
+            const queryString = "INSERT INTO user (first_name, last_name, mail, password, phone_number," +
+                " address, client_type, creation_date) VALUES (?,?,?,?,?,?,?,?)";
+            getConnection().query(queryString, [req.body.first_name, req.body.last_name, mail, password,
+                req.body.phone_number, req.body.address, req.body.client_type, new Date()], (err, results, fields) => {
+                if (err) {
+                    console.log("Failed to insert new user: " + err);
+                    res.sendStatus(500);
+                    return
+                }
+                console.log("Inserted a new user with id :" + results.insertId);
+                res.end();
+            });
         }
-        console.log("Inserted a new user with id :" + results.insertId);
-        res.end();
-    });
+    console.log("Email " + req.body.mail);
+
+
     res.end();
 });
 
+var pool = mysql.createPool({
+    host: 'localhost',
+    user: 'root',
+    password: 'root',
+    database: 'Relay',
+    port: '8889',
+    connectionLimit: 10
+});
+
 function getConnection() {
-    return mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: 'root',
-        database: 'Relay',
-        port: '8889'
-    });
+    return pool;
 }
 
 module.exports = router;

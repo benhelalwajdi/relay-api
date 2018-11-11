@@ -6,8 +6,6 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 
 
-
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -21,6 +19,7 @@ app.use(bodyParser.json())
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
 
 app.use(logger('dev'));
 app.use(express.json());
