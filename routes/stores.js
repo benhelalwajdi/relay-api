@@ -20,6 +20,21 @@ router.get('/', (req, res) => {
 });
 
 
+/* GET stores listing by type. */
+router.get('/:type', (req, res) => {
+    console.log("Fetching stores by type :"+ req.params.type);
+
+    const queryString = "SELECT * FROM user WHERE client_type = ? AND store_type = ?";
+    getConnection().query(queryString, ["STORE", req.params.type], (err, rows, fields) => {
+        if (err) {
+            console.log("Failed to query for stores by type " + err);
+            res.sendStatus(500);
+            return
+        }
+        console.log("Stores fetched by type successfully");
+        res.json(rows)
+    })
+});
 
 
 var pool = mysql.createPool({
