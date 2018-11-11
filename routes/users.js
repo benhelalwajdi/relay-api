@@ -10,8 +10,39 @@ var router = express.Router();
 });
 */
 
-/*Get user by mail. */
-router.get('/user/:mail', (req, res) => {
+/* Login */
+router.get('/user/:mail/:password', (req, res) => {
+    var bool;
+    console.log("Trying to login with EMAIL:" + req.params.mail + " PASSWORD:" + req.params.password);
+    const queryString = "SELECT * FROM user WHERE mail = ?";
+    const userMail = req.params.mail;
+    getConnection().query(queryString, [userMail], (err, rows, fields) => {
+        if (err) {
+            console.log("Failed to query for users: " + err);
+            res.sendStatus(500);
+            return
+        }
+        console.log("User fetched successfully");
+        rows.map((row) => {
+            console.log(row.password);
+            if (bcrypt.compareSync(req.params.password, row.password)) {
+                console.log("Password MATCH !");
+                bool = true;
+            } else {
+                console.log(" WRONG Password !");
+                bool = false;
+            }
+        });
+        if (bool) {
+            res.json(rows);
+        } else {
+            res.json(null);
+        }
+    });
+});
+
+/* Get user by mail. */
+/*router.get('/user/:mail', (req, res) => {
     console.log("Fetching user with mail: " + req.params.id);
 
     const userMail = req.params.mail;
@@ -29,29 +60,31 @@ router.get('/user/:mail', (req, res) => {
                     return {email: row.mail}
                 })
         */
-        res.json(rows)
+/*        res.json(rows)
     })
 });
+*/
+
 
 /* Create new user. */
 router.post('/create_user', (req, res) => {
     let mail = req.body.mail;
     let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
 
-   if (req.body.client_type == ("CLIENT")){
-            const queryString = "INSERT INTO user (first_name, last_name, mail, password, phone_number," +
-                " address, client_type, creation_date) VALUES (?,?,?,?,?,?,?,?)";
-            getConnection().query(queryString, [req.body.first_name, req.body.last_name, mail, password,
-                req.body.phone_number, req.body.address, req.body.client_type, new Date()], (err, results, fields) => {
-                if (err) {
-                    console.log("Failed to insert new user: " + err);
-                    res.sendStatus(500);
-                    return
-                }
-                console.log("Inserted a new user with id :" + results.insertId);
-                res.end();
-            });
-        }
+    if (req.body.client_type == ("CLIENT")) {
+        const queryString = "INSERT INTO user (first_name, last_name, mail, password, phone_number," +
+            " address, client_type, creation_date) VALUES (?,?,?,?,?,?,?,?)";
+        getConnection().query(queryString, [req.body.first_name, req.body.last_name, mail, password,
+            req.body.phone_number, req.body.address, req.body.client_type, new Date()], (err, results, fields) => {
+            if (err) {
+                console.log("Failed to insert new user: " + err);
+                res.sendStatus(500);
+                return
+            }
+            console.log("Inserted a new user with id :" + results.insertId);
+            res.end();
+        });
+    }
     console.log("Email " + req.body.mail);
 
 
