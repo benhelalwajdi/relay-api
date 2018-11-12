@@ -10,7 +10,7 @@ router.post('/generate_stores/:nb', (req, res) => {
     console.log("GENERATE DATA "+ req.params.nb);
     let nb = req.params.nb;
 
-    for ( i=0; i < nb ; i++ ){
+    for (var i=0; i < nb ; i++ ){
         var store = {
             name: faker.company.companyName(),
             mail: faker.internet.email(),
@@ -34,28 +34,29 @@ router.post('/generate_stores/:nb', (req, res) => {
                     return
                 }
                 console.log("Inserted a new store with id :" + results.insertId);
+                res.end();
             });
     }
     res.end();
 });
 
 /*Generate products*/
-router.post('/generate_products/:storeId/:nd', (req, res) => {
+router.post('/generate_products/:id/:nb', (req, res) => {
     console.log("GENERATE PRODUCT " + req.params.nd);
+    console.log("STORE: " + req.params.id);
     let nb = req.params.nb;
 
-    for ( i=0; i < nb ; i++ ){
+     for (var i=0; i < nb ; i++ ){
         var product = {
-            name: faker.commerce.product(),
-            description: faker.lorem.sentence(),
-            price: faker.commerce.price(),
-            quantity: faker.random.number(),
+            name: "" + faker.commerce.product(),
+            description: "" + faker.lorem.sentence(),
+            price: "" + faker.commerce.price(),
+            quantity: "" + faker.random.number(),
             size: "SMALL",
-            store_id: req.params.storeId,
+            store_id: "" + req.params.id,
         };
-
-        const queryString = "INSERT INTO product (name, description, price, quantity," +
-            "size, store_id) VALUES (?,?,?,?,?,?)";
+        console.log("LALALA");
+        const queryString = "INSERT INTO product (name, description, price, quantity, size, store_id) VALUES (?,?,?,?,?,?)";
 
         getConnection().query(queryString, [product.name, product.description, product.price, product.quantity,
                 product.size, product.store_id], (err, results, fields) => {
@@ -65,6 +66,7 @@ router.post('/generate_products/:storeId/:nd', (req, res) => {
                     return
                 }
                 console.log("Inserted a new product with id :" + results.insertId);
+                res.end();
             });
     }
     res.end();
