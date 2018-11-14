@@ -7,7 +7,7 @@ var router = express.Router();
 router.get('/', (req, res) => {
     console.log("Fetching stores");
 
-    const queryString = "SELECT * FROM user WHERE client_type = ?";
+    const queryString = "SELECT * FROM user WHERE user_type = ?";
     getConnection().query(queryString, "STORE", (err, rows, fields) => {
         if (err) {
             console.log("Failed to query for stores: " + err);
