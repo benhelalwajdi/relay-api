@@ -5,6 +5,42 @@ var bcrypt = require('bcrypt-nodejs');
 
 var router = express.Router();
 
+/* Generate clients */
+router.post('/generate_clients/:nb', (req, res) => {
+    console.log("GENERATE DATA "+ req.params.nb);
+    let nb = req.params.nb;
+
+    for (var i=0; i < nb ; i++ ){
+        var client = {
+            firstName: faker.name.firstName(),
+            lastName: faker.name.lastName(),
+            mail: faker.internet.email(),
+            password: "password",
+            phone: faker.phone.phoneNumber(),
+            address: faker.address.streetAddress() + faker.address.city() + faker.address.country(),
+            userType: "CLIENT",
+            date: new Date(),
+        };
+
+        const queryString = "INSERT INTO user (first_name, last_name, mail, password, phone_number," +
+            " address, user_type, creation_date) VALUES (?,?,?,?,?,?,?,?)";
+
+        getConnection().query(queryString, [client.firstName, client.lastName, client.mail, bcrypt.hashSync(client.password,
+            bcrypt.genSaltSync(10)), client.phone, client.address, client.userType, new Date()],
+            (err, results, fields) => {
+                if (err) {
+                    console.log("Failed to insert new client: " + err);
+                    res.sendStatus(500);
+                    return
+                }
+                console.log("Inserted a new client with id :" + results.insertId);
+                res.end();
+            });
+    }
+    res.end();
+});
+
+
 /* Generate stores */
 router.post('/generate_stores/:nb', (req, res) => {
     console.log("GENERATE DATA "+ req.params.nb);
