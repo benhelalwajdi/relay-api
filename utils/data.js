@@ -17,16 +17,16 @@ router.post('/generate_stores/:nb', (req, res) => {
             password: "password",
             phone: faker.phone.phoneNumber(),
             address: faker.address.streetAddress() + faker.address.city() + faker.address.country(),
-            clientType: "STORE",
+            userType: "STORE",
             storeType: faker.commerce.department(),
             date: new Date(),
         };
 
         const queryString = "INSERT INTO user (store_name, mail, password, phone_number," +
-            " address, client_type, store_type,creation_date) VALUES (?,?,?,?,?,?,?,?)";
+            " address, user_type, store_type,creation_date) VALUES (?,?,?,?,?,?,?,?)";
 
         getConnection().query(queryString, [store.name, store.mail, bcrypt.hashSync(store.password,
-            bcrypt.genSaltSync(10)), store.phone, store.address, store.clientType, store.storeType, new Date()],
+            bcrypt.genSaltSync(10)), store.phone, store.address, store.userType, store.storeType, new Date()],
             (err, results, fields) => {
                 if (err) {
                     console.log("Failed to insert new store: " + err);
