@@ -15,6 +15,7 @@ router.get('/', (req, res) => {
             return
         }
         console.log("Stores fetched successfully");
+
       res.json(rows)
     })
 });
