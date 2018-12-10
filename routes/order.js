@@ -23,6 +23,21 @@ router.post('/add_new_order/', (req, res) => {
         });
 });
 
+/* Get order listing by client */
+router.get('/:idClient', (req, res) => {
+    console.log("Fetching order by client :" + req.params.idClient);
+    const queryString = "SELECT * FROM orders WHERE id_client = ? GROUP BY reference";
+    getConnection().query(queryString, [ req.params.idClient], (err, rows, fields) => {
+        if (err) {
+            console.log("Failed to query for orders by client " + err);
+            res.sendStatus(500);
+            return
+        }
+        console.log("Orders fetched by type successfully");
+        res.json(rows)
+    });
+});
+
 function generateReference(req, response) {
     return reference = crypto.randomBytes(5).toString('hex').toUpperCase();
 }
