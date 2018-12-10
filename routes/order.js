@@ -3,17 +3,15 @@ var mysql = require('mysql');
 var crypto = require('crypto');
 var router = express.Router();
 
+var reference = generateReference()
+
 
 /* Add new order */
-router.get('/add_new_order/:idProduct/:idStore/:idClient', (req, res) => {
+router.post('/add_new_order/', (req, res) => {
 
-    const queryString = "INSERT INTO orders (id_product, id_store, id_client, reference, date, state) VALUES (?,?,?,?,?,?)";
-
-    var reference = crypto.randomBytes(5).toString('hex').toUpperCase();
-    console.log(reference);
-
-    getConnection().query(queryString, [req.params.idProduct, req.params.idStore, req.params.idClient, reference,
-            new Date(), "WAITING"],
+    const queryString = "INSERT INTO orders (id_product, id_store, id_client, reference, date, state, quantity) VALUES (?,?,?,?,?,?,?)";
+    getConnection().query(queryString, [req.body.idProduct, req.body.idStore, req.body.idClient, reference,
+            new Date(), "WAITING", req.body.quantity],
         (err, results, fields) => {
             if (err) {
                 console.log("Failed to insert new order: " + err);
@@ -25,7 +23,9 @@ router.get('/add_new_order/:idProduct/:idStore/:idClient', (req, res) => {
         });
 });
 
-
+function generateReference(req, response) {
+    return reference = crypto.randomBytes(5).toString('hex').toUpperCase();
+}
 var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
