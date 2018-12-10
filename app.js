@@ -11,6 +11,7 @@ var usersRouter = require('./routes/users');
 var storesRouter = require('./routes/stores');
 var productsRouter = require('./routes/products');
 var clientsRouter = require('./routes/clients');
+var orderRouter = require('./routes/order');
 
 
 /* Dummy Data */
@@ -38,6 +39,7 @@ app.use('/users', usersRouter);
 app.use('/stores', storesRouter);
 app.use('/products', productsRouter);
 app.use('/clients', clientsRouter);
+app.use('/orders',orderRouter );
 app.use('/data', dummyData);
 
 // catch 404 and forward to error handler
