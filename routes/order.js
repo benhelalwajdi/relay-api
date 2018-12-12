@@ -3,7 +3,7 @@ var mysql = require('mysql');
 var crypto = require('crypto');
 var router = express.Router();
 
-var reference = generateReference()
+var reference = generateReference();
 
 
 /* Add new order */
@@ -26,7 +26,7 @@ router.post('/add_new_order/', (req, res) => {
 /* Get order listing by client */
 router.get('/:idClient', (req, res) => {
     console.log("Fetching order by client :" + req.params.idClient);
-    const queryString = "SELECT * FROM orders WHERE id_client = ? GROUP BY reference";
+    const queryString = "SELECT * FROM orders WHERE id_client = ?  GROUP BY reference";
     getConnection().query(queryString, [ req.params.idClient], (err, rows, fields) => {
         if (err) {
             console.log("Failed to query for orders by client " + err);
