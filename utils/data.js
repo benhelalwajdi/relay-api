@@ -90,12 +90,13 @@ router.post('/generate_products/:id/:nb', (req, res) => {
             quantity: "" + faker.random.number(),
             size: "SMALL",
             store_id: "" + req.params.id,
+            date: new Date(),
         };
         console.log("LALALA");
-        const queryString = "INSERT INTO product (name, description, price, quantity, size, store_id) VALUES (?,?,?,?,?,?)";
+        const queryString = "INSERT INTO product (name, description, price, quantity, size, store_id, date) VALUES (?,?,?,?,?,?,?)";
 
         getConnection().query(queryString, [product.name, product.description, product.price, product.quantity,
-                product.size, product.store_id], (err, results, fields) => {
+                product.size, product.store_id, product.date], (err, results, fields) => {
                 if (err){
                     console.log("Failed to insert new product: " + err);
                     res.sendStatus(500);
