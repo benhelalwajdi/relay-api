@@ -35,9 +35,9 @@ router.get('/user/:mail/:password', (req, res) => {
             }
         });
         if (bool) {
-            res.json(rows);
+            res.json(rows[0]);
         } else {
-            res.json(null);
+            res.json({user: null});
         }
     });
 });

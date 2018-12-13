@@ -34,10 +34,25 @@ router.post('/upload',upload.single('profile'), function (req, res) {
         res.render('index',{message: message, status:'success'});
     }
 });
+/* Get product listing */
+router.get('/', (req, res) => {
+    console.log("Fetching product :" + req.params.id);
+
+    const queryString = "SELECT * FROM product order by date desc";
+    getConnection().query(queryString, [req.params.id], (err, rows, fields) => {
+        if (err) {
+            console.log("Failed to query for product by storeID " + err);
+            res.sendStatus(500);
+            return
+        }
+        console.log("Products fetched by type successfully");
+        res.json(rows)
+    });
+});
 
 /* GET product listing by store. */
 router.get('/:id', (req, res) => {
-    console.log("Fetching product by storeID :"+ req.params.id);
+    console.log("Fetching product by storeID :" + req.params.id);
 
     const queryString = "SELECT * FROM product WHERE store_id = ?";
     getConnection().query(queryString, [req.params.id], (err, rows, fields) => {
@@ -48,7 +63,7 @@ router.get('/:id', (req, res) => {
         }
         console.log("Products fetched by type successfully");
         res.json(rows)
-    })
+    });
 });
 
 /* GET product listing id prod by store. */
@@ -127,6 +142,20 @@ router.post('/update/produit', function (req, res){
 });
 
 
+/* GET product by id */
+router.get('/product/:idProduct', (req, res) => {
+    console.log(req.params.idProduct + " " + req.params.idStore);
+    const queryString = "SELECT * FROM product WHERE id = ?";
+    getConnection().query(queryString, [req.params.idProduct], (err, rows, fields) => {
+        if (err) {
+            console.log("Failed to query for product by storeID and productID " + err);
+            res.sendStatus(500);
+            return
+        }
+        console.log("Product fetched by storeID and productID successfully");
+        res.json(rows[0])
+    });
+});
 
 var pool = mysql.createPool({
     host: 'localhost',

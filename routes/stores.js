@@ -3,7 +3,12 @@ var mysql = require('mysql');
 
 var router = express.Router();
 
+/* GET stores listing. */
+router.get('/', (req, res) => {
+    console.log("Fetching stores");
 
+    const queryString = "SELECT * FROM user WHERE user_type = ?";
+    getConnection().query(queryString, "STORE", (err, rows, fields) => {
 /* GET Store listing by id. */
 router.get('/:id', (req, res) => {
     console.log("Fetching store by ID :"+ req.params.id);
@@ -15,12 +20,14 @@ router.get('/:id', (req, res) => {
             res.sendStatus(500);
             return
         }
-        console.log("Store fetched by id successfully");
-        res.json(rows)
+        console.log("Stores fetched successfully");
+
+      res.json(rows)
     })
 });
 
-/* Get Store By store type */
+
+/* GET stores listing by type. */
 router.get('/:type', (req, res) => {
     console.log("Fetching stores by type :"+ req.params.type);
 

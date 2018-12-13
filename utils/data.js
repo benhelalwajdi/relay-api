@@ -5,28 +5,64 @@ var bcrypt = require('bcrypt-nodejs');
 
 var router = express.Router();
 
+/* Generate clients */
+router.post('/generate_clients/:nb', (req, res) => {
+    console.log("GENERATE DATA "+ req.params.nb);
+    let nb = req.params.nb;
+
+    for (var i=0; i < nb ; i++ ){
+        var client = {
+            firstName: faker.name.firstName(),
+            lastName: faker.name.lastName(),
+            mail: faker.internet.email(),
+            password: "password",
+            phone: faker.phone.phoneNumber(),
+            address: faker.address.streetAddress() + faker.address.city() + faker.address.country(),
+            userType: "CLIENT",
+            date: new Date(),
+        };
+
+        const queryString = "INSERT INTO user (first_name, last_name, mail, password, phone_number," +
+            " address, user_type, creation_date) VALUES (?,?,?,?,?,?,?,?)";
+
+        getConnection().query(queryString, [client.firstName, client.lastName, client.mail, bcrypt.hashSync(client.password,
+            bcrypt.genSaltSync(10)), client.phone, client.address, client.userType, new Date()],
+            (err, results, fields) => {
+                if (err) {
+                    console.log("Failed to insert new client: " + err);
+                    res.sendStatus(500);
+                    return
+                }
+                console.log("Inserted a new client with id :" + results.insertId);
+                res.end();
+            });
+    }
+    res.end();
+});
+
+
 /* Generate stores */
 router.post('/generate_stores/:nb', (req, res) => {
     console.log("GENERATE DATA "+ req.params.nb);
     let nb = req.params.nb;
 
-    for ( i=0; i < nb ; i++ ){
+    for (var i=0; i < nb ; i++ ){
         var store = {
             name: faker.company.companyName(),
             mail: faker.internet.email(),
             password: "password",
             phone: faker.phone.phoneNumber(),
             address: faker.address.streetAddress() + faker.address.city() + faker.address.country(),
-            clientType: "STORE",
+            userType: "STORE",
             storeType: faker.commerce.department(),
             date: new Date(),
         };
 
         const queryString = "INSERT INTO user (store_name, mail, password, phone_number," +
-            " address, client_type, store_type,creation_date) VALUES (?,?,?,?,?,?,?,?)";
+            " address, user_type, store_type,creation_date) VALUES (?,?,?,?,?,?,?,?)";
 
         getConnection().query(queryString, [store.name, store.mail, bcrypt.hashSync(store.password,
-            bcrypt.genSaltSync(10)), store.phone, store.address, store.clientType, store.storeType, new Date()],
+            bcrypt.genSaltSync(10)), store.phone, store.address, store.userType, store.storeType, new Date()],
             (err, results, fields) => {
                 if (err) {
                     console.log("Failed to insert new store: " + err);
@@ -34,37 +70,40 @@ router.post('/generate_stores/:nb', (req, res) => {
                     return
                 }
                 console.log("Inserted a new store with id :" + results.insertId);
+                res.end();
             });
     }
     res.end();
 });
 
 /*Generate products*/
-router.get('/generate_products/:storeId/:nd', (req, res) => {
+router.post('/generate_products/:id/:nb', (req, res) => {
     console.log("GENERATE PRODUCT " + req.params.nd);
+    console.log("STORE: " + req.params.id);
     let nb = req.params.nb;
 
-    for ( i=0; i < nb ; i++ ){
+     for (var i=0; i < nb ; i++ ){
         var product = {
-            name: faker.commerce.product(),
-            description: faker.lorem.sentence(),
-            price: faker.commerce.price(),
-            quantity: faker.random.number(),
+            name: "" + faker.commerce.product(),
+            description: "" + faker.lorem.sentence(),
+            price: "" + faker.commerce.price(),
+            quantity: "" + faker.random.number(),
             size: "SMALL",
-            store_id: req.params.storeId,
+            store_id: "" + req.params.id,
+            date: new Date(),
         };
-
-        const queryString = "INSERT INTO product (name, description, price, quantity," +
-            "size, store_id) VALUES (?,?,?,?,?,?)";
+        console.log("LALALA");
+        const queryString = "INSERT INTO product (name, description, price, quantity, size, store_id, date) VALUES (?,?,?,?,?,?,?)";
 
         getConnection().query(queryString, [product.name, product.description, product.price, product.quantity,
-                product.size, product.store_id], (err, results, fields) => {
+                product.size, product.store_id, product.date], (err, results, fields) => {
                 if (err){
                     console.log("Failed to insert new product: " + err);
                     res.sendStatus(500);
                     return
                 }
                 console.log("Inserted a new product with id :" + results.insertId);
+                res.end();
             });
     }
     res.end();
