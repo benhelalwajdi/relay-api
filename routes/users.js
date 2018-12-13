@@ -1,6 +1,7 @@
 var express = require('express');
 var mysql = require('mysql');
 var bcrypt = require('bcrypt-nodejs');
+
 var router = express.Router();
 
 
@@ -71,11 +72,11 @@ router.post('/create_user', (req, res) => {
     let mail = req.body.mail;
     let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
 
-    if (req.body.client_type == ("CLIENT")) {
+    if (req.body.user_type == ("CLIENT")) {
         const queryString = "INSERT INTO user (first_name, last_name, mail, password, phone_number," +
-            " address, client_type, creation_date) VALUES (?,?,?,?,?,?,?,?)";
+            " address, user_type, creation_date) VALUES (?,?,?,?,?,?,?,?)";
         getConnection().query(queryString, [req.body.first_name, req.body.last_name, mail, password,
-            req.body.phone_number, req.body.address, req.body.client_type, new Date()], (err, results, fields) => {
+            req.body.phone_number, req.body.address, req.body.user_type, new Date()], (err, results, fields) => {
             if (err) {
                 console.log("Failed to insert new user: " + err);
                 res.sendStatus(500);
@@ -86,17 +87,15 @@ router.post('/create_user', (req, res) => {
         });
     }
     console.log("Email " + req.body.mail);
-
-
     res.end();
 });
 
 var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'root',
-    database: 'Relay',
-    port: '8889',
+    password: 'wbh52',
+    database: 'relay',
+    port: '3306',
     connectionLimit: 10
 });
 

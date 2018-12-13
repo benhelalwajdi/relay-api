@@ -40,7 +40,7 @@ router.post('/generate_stores/:nb', (req, res) => {
 });
 
 /*Generate products*/
-router.post('/generate_products/:storeId/:nd', (req, res) => {
+router.get('/generate_products/:storeId/:nd', (req, res) => {
     console.log("GENERATE PRODUCT " + req.params.nd);
     let nb = req.params.nb;
 
@@ -76,9 +76,9 @@ router.post('/generate_products/:storeId/:nd', (req, res) => {
 var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'root',
-    database: 'Relay',
-    port: '8889',
+    password: 'wbh52',
+    database: 'relay',
+    port: '3306',
     connectionLimit: 50
 });
 
