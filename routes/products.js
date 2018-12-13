@@ -36,17 +36,17 @@ router.get('/:id', (req, res) => {
 });
 
 /* GET product by id */
-router.get('/:idProduct/:idStore', (req, res) => {
+router.get('/product/:idProduct', (req, res) => {
     console.log(req.params.idProduct + " " + req.params.idStore);
-    const queryString = "SELECT * FROM product WHERE id = ? AND store_id = ?";
-    getConnection().query(queryString, [req.params.idProduct, req.params.idStore], (err, rows, fields) => {
+    const queryString = "SELECT * FROM product WHERE id = ?";
+    getConnection().query(queryString, [req.params.idProduct], (err, rows, fields) => {
         if (err) {
             console.log("Failed to query for product by storeID and productID " + err);
             res.sendStatus(500);
             return
         }
         console.log("Product fetched by storeID and productID successfully");
-        res.json(rows)
+        res.json(rows[0])
     });
 });
 
