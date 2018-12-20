@@ -35,7 +35,7 @@ router.get('/user/:mail/:password', (req, res) => {
             }
         });
         if (bool) {
-            res.json(rows);
+            res.json(rows[0]);
         } else {
             res.json(null);
         }
@@ -93,9 +93,9 @@ router.post('/create_user', (req, res) => {
 var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'wbh52',
-    database: 'relay',
-    port: '3306',
+    password: 'root',
+    database: 'Relay',
+    port: '8889',
     connectionLimit: 10
 });
 

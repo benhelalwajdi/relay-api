@@ -3,6 +3,25 @@ var mysql = require('mysql');
 var router = express.Router();
 
 var multer = require('multer');
+
+
+/* GET product listing . */
+router.get('/', (req, res) => {
+    console.log("Fetching product  :"+ req.params.id);
+
+    const queryString = "SELECT * FROM product ORDER BY date desc";
+    getConnection().query(queryString, [req.params.id], (err, rows, fields) => {
+        if (err) {
+            console.log("Failed to query for product by storeID " + err);
+            res.sendStatus(500);
+            return
+        }
+        console.log("Products fetched by type successfully");
+        res.json(rows)
+    })
+});
+
+
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'public/uploads')
@@ -131,9 +150,9 @@ router.post('/update/produit', function (req, res){
 var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'wbh52',
-    database: 'relay',
-    port: '3306',
+    password: 'root',
+    database: 'Relay',
+    port: '8889',
     connectionLimit: 10
 });
 

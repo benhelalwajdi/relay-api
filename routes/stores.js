@@ -55,9 +55,9 @@ router.get('/', (req, res) => {
 var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'wbh52',
-    database: 'relay',
-    port: '3306',
+    password: 'root',
+    database: 'Relay',
+    port: '8889',
     connectionLimit: 10
 });
 
