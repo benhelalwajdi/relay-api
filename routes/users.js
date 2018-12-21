@@ -40,17 +40,16 @@ router.post('/create_client', (req, res) => {
     const queryString = "INSERT INTO user (first_name, last_name, mail, password, phone_number," +
         " address, user_type, creation_date) VALUES (?,?,?,?,?,?,?,?)";
     getConnection().query(queryString, [req.body.first_name, req.body.last_name, req.body.mail, password,
-        req.body.phone_number, req.body.address, 'CLIENT', new Date()], (err, results, fields) => {
+        req.body.phone_number, req.body.address, 'CLIENT', new Date()], (err, results) => {
         if (err) {
             console.log("Failed to insert new client: " + err);
-            res.sendStatus(500);
-            return
+            res.json({status: false, error: err});
+
         }
         console.log("Inserted a new client with id :" + results.insertId);
-        res.end();
+        res.json({status: true});
+
     });
-    console.log("Email " + req.params.mail);
-    res.end();
 });
 
 
