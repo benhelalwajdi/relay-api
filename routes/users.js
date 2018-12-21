@@ -48,10 +48,25 @@ router.post('/create_client', (req, res) => {
         }
         console.log("Inserted a new client with id :" + results.insertId);
         res.json({status: true});
-
     });
 });
 
+/* Create new store */
+router.post('/create_store', (req, res) => {
+    let password = bcrypt.hashSync(req.params.password, bcrypt.genSaltSync(10));
+    const queryString = "INSERT INTO user (store_name, store_type, mail, password, address, phone_number," +
+        " user_type, creation_date) VALUES (?,?,?,?,?,?,?,?)";
+    getConnection().query(queryString, [req.body.store_name, req.body.store_type, req.body.mail, password,
+        req.body.address, req.body.phone_number, 'STORE', new Date()], (err, results) => {
+        if (err) {
+            console.log("Failed to insert new store: " + err);
+            res.json({status: false, error: err});
+
+        }
+        console.log("Inserted a new store with id :" + results.insertId);
+        res.json({status: true});
+    });
+});
 
 var pool = mysql.createPool({
     host: 'localhost',
