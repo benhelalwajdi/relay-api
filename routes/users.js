@@ -36,7 +36,7 @@ router.get('/user/:mail/:password', (req, res) => {
 
 /* Create new client */
 router.post('/create_client', (req, res) => {
-    let password = bcrypt.hashSync(req.params.password, bcrypt.genSaltSync(10));
+    let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
     const queryString = "INSERT INTO user (first_name, last_name, mail, password, phone_number," +
         " address, user_type, creation_date) VALUES (?,?,?,?,?,?,?,?)";
     getConnection().query(queryString, [req.body.first_name, req.body.last_name, req.body.mail, password,
@@ -53,7 +53,7 @@ router.post('/create_client', (req, res) => {
 
 /* Create new store */
 router.post('/create_store', (req, res) => {
-    let password = bcrypt.hashSync(req.params.password, bcrypt.genSaltSync(10));
+    let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
     const queryString = "INSERT INTO user (store_name, store_type, mail, password, address, phone_number," +
         " user_type, creation_date) VALUES (?,?,?,?,?,?,?,?)";
     getConnection().query(queryString, [req.body.store_name, req.body.store_type, req.body.mail, password,
@@ -67,6 +67,24 @@ router.post('/create_store', (req, res) => {
         res.json({status: true});
     });
 });
+
+/* Create new deliverer */
+router.post('/create_deliverer', (req, res) => {
+    let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+    const queryString = "INSERT INTO user (first_name, last_name, phone_number, address, mail, password, vehicle, " +
+        "user_type, creation_date) VALUES (?,?,?,?,?,?,?,?,?)";
+    getConnection().query(queryString, [req.body.first_name, req.body.last_name, req.body.phone_number, req.body.address,
+        req.body.mail, password, req.body.vehicle, 'DELIVERER', new Date()], (err, results) => {
+        if (err) {
+            console.log("Failed to insert new deliverer: " + err);
+            res.json({status: false, error: err});
+
+        }
+        console.log("Inserted a new deliverer with id :" + results.insertId);
+        res.json({status: true});
+    });
+});
+
 
 var pool = mysql.createPool({
     host: 'localhost',
