@@ -78,6 +78,20 @@ router.get('/store/:id/state/:state', (req, res) => {
     });
 });
 
+/* GET order listing for client by state */
+router.get('/client/:id/state/:state', (req, res) => {
+    console.log("Fetching order for client by state :" + req.params.state);
+    const queryString = "SELECT * FROM orders WHERE id_client = ? AND state = ?";
+    getConnection().query(queryString, [req.params.id, req.params.state], (err, rows, fields) => {
+        if (err) {
+            console.log("Failed to query for orders by state " + err);
+            res.json({status: false, error: err});
+        }
+        console.log("Orders fetched by state successfully");
+        res.json(rows)
+    });
+});
+
 
 //TODO: Get the reference from sender.
 function generateReference(req, response) {
