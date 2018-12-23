@@ -99,6 +99,22 @@ router.post('/create_deliverer', upload.single('image'), (req, res) => {
 });
 
 
+/* Update client */
+router.post('/update_client', (req, res)=> {
+    let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+    const queryString = "UPDATE user SET first_name = ? , last_name = ? , mail = ? , password = ? , address = ?," +
+        " phone_number = ? WHERE id = ?";
+    getConnection().query(queryString, [req.body.first_name, req.body.last_name, req.body.mail, password,
+        req.body.address, req.body.phone_number, req.body.id], (err) => {
+        if (err) {
+            console.log("Failed to update client: " + err);
+            res.json({status: false, error: err});
+        }
+        console.log("Client updated successfully");
+        res.json({status: true});
+    });
+});
+
 var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
