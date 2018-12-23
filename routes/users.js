@@ -115,6 +115,24 @@ router.post('/update_client', (req, res)=> {
     });
 });
 
+
+/* Update store */
+router.post('/update_store', (req, res)=> {
+    let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+    const queryString = "UPDATE user SET store_name = ? , store_type = ? , mail = ? , password = ? , address = ?," +
+        " phone_number = ? WHERE id = ?";
+    getConnection().query(queryString, [req.body.store_name, req.body.store_type, req.body.mail, password,
+        req.body.address, req.body.phone_number, req.body.id], (err) => {
+        if (err) {
+            console.log("Failed to update store: " + err);
+            res.json({status: false, error: err});
+        }
+        console.log("Store updated successfully");
+        res.json({status: true});
+    });
+});
+
+
 var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
