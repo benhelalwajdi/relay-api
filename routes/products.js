@@ -3,7 +3,7 @@ var mysql = require('mysql');
 
 var router = express.Router();
 
-/* Get product listing */
+/* GET product listing */
 router.get('/', (req, res) => {
     console.log("Fetching product :" + req.params.id);
 
@@ -98,7 +98,7 @@ router.post('/create_product', function (req, res){
 });
 
 /* UPDATE product */
-router.post('/update', function (req, res){
+router.post('/update_product', function (req, res){
     console.log(req.headers);
     console.log(req.body);
     console.log("update product to the store with ID : " + req.body.store_id);
@@ -118,7 +118,7 @@ router.post('/update', function (req, res){
 });
 
 /* Delete product */
-router.post('/delete', function (req, res){
+router.post('/delete_product', function (req, res){
     console.log(req.headers);
     console.log(req.body);
     console.log("Add product to the store with ID : " + req.body.id);
