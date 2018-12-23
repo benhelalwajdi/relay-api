@@ -41,7 +41,7 @@ app.use('/stores', storesRouter);
 app.use('/products', productsRouter);
 app.use('/clients', clientsRouter);
 app.use('/orders',orderRouter );
-app.use('/productReview', productReview);
+app.use('/product_reviews', productReview);
 app.use('/data', dummyData);
 
 // catch 404 and forward to error handler
