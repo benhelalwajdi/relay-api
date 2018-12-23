@@ -10,43 +10,42 @@ router.get('/', (req, res) => {
     const queryString = "SELECT * FROM product order by date desc";
     getConnection().query(queryString, [req.params.id], (err, rows, fields) => {
         if (err) {
-            console.log("Failed to query for product by storeID " + err);
+            console.log("Failed to query for products " + err);
             res.sendStatus(500);
             return
         }
-        console.log("Products fetched by type successfully");
+        console.log("Products fetched successfully");
         res.json(rows)
     });
 });
 
-/* GET product listing by store. */
+/* GET product by id */
 router.get('/:id', (req, res) => {
+    const queryString = "SELECT * FROM product WHERE id = ?";
+    getConnection().query(queryString, [req.params.id], (err, rows, fields) => {
+        if (err) {
+            console.log("Failed to query for product by ID" + err);
+            res.json({status: false, error: err});
+        }
+        console.log("Product fetched by ID successfully");
+        res.json(rows[0])
+    });
+});
+
+
+/* GET product listing by store. */
+router.get('/store/:id', (req, res) => {
     console.log("Fetching product by storeID :" + req.params.id);
 
     const queryString = "SELECT * FROM product WHERE store_id = ?";
     getConnection().query(queryString, [req.params.id], (err, rows, fields) => {
         if (err) {
             console.log("Failed to query for product by storeID " + err);
-            res.sendStatus(500);
+            res.json({status: false, error: err});
             return
         }
         console.log("Products fetched by type successfully");
         res.json(rows)
-    });
-});
-
-/* GET product by id */
-router.get('/product/:idProduct', (req, res) => {
-    console.log(req.params.idProduct + " " + req.params.idStore);
-    const queryString = "SELECT * FROM product WHERE id = ?";
-    getConnection().query(queryString, [req.params.idProduct], (err, rows, fields) => {
-        if (err) {
-            console.log("Failed to query for product by storeID and productID " + err);
-            res.sendStatus(500);
-            return
-        }
-        console.log("Product fetched by storeID and productID successfully");
-        res.json(rows[0])
     });
 });
 
