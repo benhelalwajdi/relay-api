@@ -97,23 +97,6 @@ router.post('/create_product', function (req, res){
     })
 });
 
-/* Delete product */
-router.post('/delete', function (req, res){
-    console.log(req.headers);
-    console.log(req.body);
-    const FORM_URLENCODED = 'application/form-data';
-    console.log("Add product to the store with ID : " + req.body.id);
-    const queryString = "delete from Product where id = ?";
-    getConnection().query(queryString, [req.body.id], (err, results, fields) => {
-        if (err) {
-            console.log("Failed to delete product: " + err);
-            res.json({status: false, error: err});
-        }
-        console.log("Delete product ");
-        res.json({status: true});
-    })
-});
-
 /* UPDATE product */
 router.post('/update', function (req, res){
     console.log(req.headers);
@@ -134,7 +117,22 @@ router.post('/update', function (req, res){
     })
 });
 
-
+/* Delete product */
+router.post('/delete', function (req, res){
+    console.log(req.headers);
+    console.log(req.body);
+    const FORM_URLENCODED = 'application/form-data';
+    console.log("Add product to the store with ID : " + req.body.id);
+    const queryString = "delete from Product where id = ?";
+    getConnection().query(queryString, [req.body.id], (err, results, fields) => {
+        if (err) {
+            console.log("Failed to delete product: " + err);
+            res.json({status: false, error: err});
+        }
+        console.log("Delete product ");
+        res.json({status: true});
+    })
+});
 
 
 var pool = mysql.createPool({
