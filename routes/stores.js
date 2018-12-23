@@ -11,26 +11,35 @@ router.get('/', (req, res) => {
     getConnection().query(queryString, "STORE", (err, rows, fields) => {
         if (err) {
             console.log("Failed to query for stores: " + err);
-            res.sendStatus(500);
-            return
+            res.json({status: false, error: err});
         }
         console.log("Stores fetched successfully");
-
-      res.json(rows)
-    })
+        res.json(rows)
+    });
 });
 
+/* GET stores listing by id */
+router.get('/:id', (req, res) => {
+    const queryString = "SELECT * FROM user WHERE id = ?";
+    getConnection().query(queryString, req.params.id, (err, rows, fields) => {
+        if (err) {
+            console.log("Failed to query for stores by ID: " + err);
+            res.json({status: false, error: err});
+        }
+        console.log("Stores fetched by ID successfully");
+        res.json(rows[0]);
+    });
+});
 
 /* GET stores listing by type. */
-router.get('/:type', (req, res) => {
-    console.log("Fetching stores by type :"+ req.params.type);
+router.get('/type/:type', (req, res) => {
+    console.log("Fetching stores by type :" + req.params.type);
 
-    const queryString = "SELECT * FROM user WHERE client_type = ? AND store_type = ?";
-    getConnection().query(queryString, ["STORE", req.params.type], (err, rows, fields) => {
+    const queryString = "SELECT * FROM user WHERE  store_type = ?";
+    getConnection().query(queryString, [req.params.type], (err, rows, fields) => {
         if (err) {
             console.log("Failed to query for stores by type " + err);
-            res.sendStatus(500);
-            return
+            res.json({status: false, error: err});
         }
         console.log("Stores fetched by type successfully");
         res.json(rows)
