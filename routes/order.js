@@ -6,8 +6,8 @@ var router = express.Router();
 var reference = generateReference();
 
 
-/* Add new order */
-router.post('/add_new_order/', (req, res) => {
+/* ADD new order */
+router.post('/add_order/', (req, res) => {
 
     const queryString = "INSERT INTO orders (id_product, id_store, id_client, reference, date, state, quantity) VALUES (?,?,?,?,?,?,?)";
     getConnection().query(queryString, [req.body.idProduct, req.body.idStore, req.body.idClient, reference,
@@ -15,29 +15,58 @@ router.post('/add_new_order/', (req, res) => {
         (err, results, fields) => {
             if (err) {
                 console.log("Failed to insert new order: " + err);
-                res.sendStatus(500);
-                return
+                res.json({status: false, error: err});
             }
             console.log("Inserted a new order with id :" + results.insertId);
-            res.end();
+            res.json({status: true});
         });
 });
 
-/* Get order listing by client */
-router.get('/:idClient', (req, res) => {
-    console.log("Fetching order by client :" + req.params.idClient);
+/* GET order listing by client */
+router.get('/client/:id', (req, res) => {
+    console.log("Fetching order by client :" + req.params.id);
     const queryString = "SELECT * FROM orders WHERE id_client = ?  GROUP BY reference";
-    getConnection().query(queryString, [ req.params.idClient], (err, rows, fields) => {
+    getConnection().query(queryString, [ req.params.id], (err, rows, fields) => {
         if (err) {
             console.log("Failed to query for orders by client " + err);
-            res.sendStatus(500);
-            return
+            res.json({status: false, error: err});
         }
-        console.log("Orders fetched by type successfully");
+        console.log("Orders fetched by client successfully");
         res.json(rows)
     });
 });
 
+/* GET order listing by store */
+router.get('/store/:id', (req, res) => {
+    console.log("Fetching order by store :" + req.params.id);
+    const queryString = "SELECT * FROM orders WHERE id_store = ?  GROUP BY reference";
+    getConnection().query(queryString, [ req.params.id], (err, rows, fields) => {
+        if (err) {
+            console.log("Failed to query for orders by store " + err);
+            res.json({status: false, error: err});
+        }
+        console.log("Orders fetched by store successfully");
+        res.json(rows)
+    });
+});
+
+/* GET order listing by reference */
+router.get('/store/reference/:reference', (req, res) => {
+    console.log("Fetching order by store :" + req.params.id);
+    const queryString = "SELECT * FROM orders WHERE reference = ?";
+    getConnection().query(queryString, [req.params.reference], (err, rows, fields) => {
+        if (err) {
+            console.log("Failed to query for orders by reference " + err);
+            res.json({status: false, error: err});
+        }
+        console.log("Orders fetched by reference successfully");
+        res.json(rows)
+    });
+});
+
+
+
+//TODO: Get the reference from sender.
 function generateReference(req, response) {
     return reference = crypto.randomBytes(5).toString('hex').toUpperCase();
 }
