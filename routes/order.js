@@ -92,6 +92,8 @@ router.get('/client/:id/state/:state', (req, res) => {
     });
 });
 
+//TODO : Create the route to change order state.
+/* UPDATE order state */
 
 //TODO: Get the reference from sender.
 function generateReference(req, response) {
