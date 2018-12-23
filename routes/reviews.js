@@ -49,6 +49,19 @@ router.get('/product/:id', (req, res) => {
    });
 });
 
+/* GET store review listing*/
+router.get('/store/:id', (req, res) => {
+    const queryString = "SELECT * FROM store_review WHERE id_store = ?";
+    getConnection().query(queryString, [req.params.id], (err, rows)=>{
+        if (err){
+            console.log("Failed to fetch for reviews on store with ID: " + req.params.id);
+            res.json({status: false, error: err});
+        }
+        console.log("Review on store fetched successfully.");
+        res.json(rows)
+    });
+});
+
 var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
