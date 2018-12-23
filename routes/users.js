@@ -147,6 +147,9 @@ router.post('/update_deliverer', (req, res)=> {
     });
 });
 
+//TODO: Add route to delete account and clear related tables.
+/* Delete account */
+
 var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
