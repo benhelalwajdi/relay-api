@@ -1,15 +1,9 @@
 var express = require('express');
 var mysql = require('mysql');
 var bcrypt = require('bcrypt-nodejs');
+var multer = require('multer');
 
 var router = express.Router();
-
-
-/* GET users listing. */
-/*router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-*/
 
 /* Login */
 router.get('/user/:mail/:password', (req, res) => {
@@ -42,60 +36,126 @@ router.get('/user/:mail/:password', (req, res) => {
     });
 });
 
-/* Get user by mail. */
-/*router.get('/user/:mail', (req, res) => {
-    console.log("Fetching user with mail: " + req.params.id);
-
-    const userMail = req.params.mail;
-    const queryString = "SELECT * FROM user WHERE mail = ?";
-    getConnection().query(queryString, [userMail], (err, rows, fields) => {
-        if (err) {
-            console.log("Failed to query for users: " + err);
-            res.sendStatus(500);
-            return
-        }
-        console.log("User fetched successfully");
-        /*
-                //Format JSON
-                const users = rows.map((row)=>{
-                    return {email: row.mail}
-                })
-        */
-/*        res.json(rows)
-    })
-});
-*/
-
-
-/* Create new user. */
-router.post('/create_user', (req, res) => {
-    let mail = req.body.mail;
-    let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
-
-    if (req.body.user_type == ("CLIENT")) {
-        const queryString = "INSERT INTO user (first_name, last_name, mail, password, phone_number," +
-            " address, user_type, creation_date) VALUES (?,?,?,?,?,?,?,?)";
-        getConnection().query(queryString, [req.body.first_name, req.body.last_name, mail, password,
-            req.body.phone_number, req.body.address, req.body.user_type, new Date()], (err, results, fields) => {
-            if (err) {
-                console.log("Failed to insert new user: " + err);
-                res.sendStatus(500);
-                return
-            }
-            console.log("Inserted a new user with id :" + results.insertId);
-            res.end();
-        });
+/* Upload image to server */
+var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/uploads')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '-' + Date.now() + '.' + file.originalname)
     }
-    console.log("Email " + req.body.mail);
-    res.end();
 });
+var upload = multer({storage: storage});
+module.exports = upload;
+
+
+/* Create new client */
+router.post('/create_client', upload.single('image'), (req, res) => {
+    let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+    const queryString = "INSERT INTO user (first_name, last_name, mail, password, phone_number," +
+        " address, user_type, creation_date) VALUES (?,?,?,?,?,?,?,?)";
+    getConnection().query(queryString, [req.body.first_name, req.body.last_name, req.body.mail, password,
+        req.body.phone_number, req.body.address, 'CLIENT', new Date()], (err, results) => {
+        if (err) {
+            console.log("Failed to insert new client: " + err);
+            res.json({status: false, error: err});
+        }
+        console.log("Inserted a new client with id :" + results.insertId);
+        res.json({status: true});
+    });
+
+});
+
+/* Create new store */
+router.post('/create_store',upload.single('image'), (req, res) => {
+    let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+    const queryString = "INSERT INTO user (store_name, store_type, mail, password, address, phone_number," +
+        " user_type, creation_date, image) VALUES (?,?,?,?,?,?,?,?,?)";
+    getConnection().query(queryString, [req.body.store_name, req.body.store_type, req.body.mail, password,
+        req.body.address, req.body.phone_number, 'STORE', new Date(), req.file.filename], (err, results) => {
+        if (err) {
+            console.log("Failed to insert new store: " + err);
+            res.json({status: false, error: err});
+        }
+        console.log("Inserted a new store with id :" + results.insertId);
+        res.json({status: true});
+    });
+});
+
+/* Create new deliverer */
+router.post('/create_deliverer', upload.single('image'), (req, res) => {
+    let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+    const queryString = "INSERT INTO user (first_name, last_name, phone_number, address, mail, password, vehicle, " +
+        "user_type, creation_date, image) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    getConnection().query(queryString, [req.body.first_name, req.body.last_name, req.body.phone_number, req.body.address,
+        req.body.mail, password, req.body.vehicle, 'DELIVERER', new Date(), req.file.filename], (err, results) => {
+        if (err) {
+            console.log("Failed to insert new deliverer: " + err);
+            res.json({status: false, error: err});
+        }
+        console.log("Inserted a new deliverer with id :" + results.insertId);
+        res.json({status: true});
+    });
+});
+
+
+/* Update client */
+router.post('/update_client', (req, res)=> {
+    let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+    const queryString = "UPDATE user SET first_name = ? , last_name = ? , mail = ? , password = ? , address = ?," +
+        " phone_number = ? WHERE id = ?";
+    getConnection().query(queryString, [req.body.first_name, req.body.last_name, req.body.mail, password,
+        req.body.address, req.body.phone_number, req.body.id], (err) => {
+        if (err) {
+            console.log("Failed to update client: " + err);
+            res.json({status: false, error: err});
+        }
+        console.log("Client updated successfully");
+        res.json({status: true});
+    });
+});
+
+/* Update store */
+router.post('/update_store', (req, res)=> {
+    let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+    const queryString = "UPDATE user SET store_name = ? , store_type = ? , mail = ? , password = ? , address = ?," +
+        " phone_number = ? WHERE id = ?";
+    getConnection().query(queryString, [req.body.store_name, req.body.store_type, req.body.mail, password,
+        req.body.address, req.body.phone_number, req.body.id], (err) => {
+        if (err) {
+            console.log("Failed to update store: " + err);
+            res.json({status: false, error: err});
+        }
+        console.log("Store updated successfully");
+        res.json({status: true});
+    });
+});
+
+/* Update deliverer */
+router.post('/update_deliverer', (req, res)=> {
+    let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+    const queryString = "UPDATE user SET first_name = ? , last_name = ? , mail = ? , password = ? , address = ?," +
+        " phone_number = ?, vehicle = ? WHERE id = ?";
+    getConnection().query(queryString, [req.body.first_name, req.body.last_name, req.body.mail, password,
+        req.body.address, req.body.phone_number, req.body.vehicle, req.body.id], (err) => {
+        if (err) {
+            console.log("Failed to update store: " + err);
+            res.json({status: false, error: err});
+        }
+        console.log("Store updated successfully");
+        res.json({status: true});
+    });
+});
+
+//TODO: Add route to delete account and clear related tables.
+/* Delete account */
 
 var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'wbh52',
-    database: 'relay',
-    port: '3306',
+    password: 'root',
+    database: 'Relay',
+    port: '8889',
     connectionLimit: 10
 });
 

@@ -76,6 +76,45 @@ router.post('/generate_stores/:nb', (req, res) => {
     res.end();
 });
 
+/* Generate deliverer */
+router.post('/generate_deliverers/:nb', (req, res) => {
+    console.log("GENERATE DATA "+ req.params.nb);
+    let nb = req.params.nb;
+
+    var vehicles = ['TWO WHEELS', 'CAR', 'TRUCK'];
+    for (var i=0; i < nb ; i++ ){
+        var randomNumber = Math.floor(Math.random()*vehicles.length);
+        var deliverer = {
+            firstName: faker.name.firstName(),
+            lastName: faker.name.lastName(),
+            mail: faker.internet.email(),
+            password: "password",
+            phone: faker.phone.phoneNumber(),
+            address: faker.address.streetAddress() + faker.address.city() + faker.address.country(),
+            vehicle: vehicles[randomNumber],
+            userType: "DELIVERER",
+            date: new Date(),
+        };
+
+        const queryString = "INSERT INTO user (first_name, last_name, mail, password, phone_number," +
+            " address, vehicle, user_type, creation_date) VALUES (?,?,?,?,?,?,?,?,?)";
+
+        getConnection().query(queryString, [deliverer.firstName, deliverer.lastName, deliverer.mail,
+                bcrypt.hashSync(deliverer.password, bcrypt.genSaltSync(10)), deliverer.phone, deliverer.address,
+                deliverer.vehicle, deliverer.userType, new Date()],
+            (err, results, fields) => {
+                if (err) {
+                    console.log("Failed to insert new deliverer: " + err);
+                    res.sendStatus(500);
+                    return
+                }
+                console.log("Inserted a new deliverer with id :" + results.insertId);
+                res.end();
+            });
+    }
+    res.end();
+});
+
 /*Generate products*/
 router.post('/generate_products/:id/:nb', (req, res) => {
     console.log("GENERATE PRODUCT " + req.params.nd);

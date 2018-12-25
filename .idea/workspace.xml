@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ea0a945b-9caa-453e-85ff-0b70fd0b6cd3" name="Default Changelist" comment="Remove client_type attribute">
+    <list default="true" id="ea0a945b-9caa-453e-85ff-0b70fd0b6cd3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/order.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/products.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/products.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/users.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/data.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/data.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -22,7 +18,7 @@
     <session id="-1562894034">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="19" />
+          <entry key="project.closed" value="20" />
           <entry key="project.open.time.0" value="4" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.3" value="3" />
@@ -35,109 +31,59 @@
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
         <counts>
+          <entry key="git.branch.checkout.local" value="1" />
           <entry key="git.branch.checkout.remote" value="1" />
+          <entry key="git.branch.compare" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gitignore" value="1" />
-          <entry key="js" value="28" />
-          <entry key="json" value="3" />
+          <entry key="jpg" value="1" />
+          <entry key="js" value="41" />
+          <entry key="json" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JSON" value="3" />
-          <entry key="JavaScript" value="28" />
+          <entry key="Image" value="1" />
+          <entry key="JSON" value="4" />
+          <entry key="JavaScript" value="41" />
           <entry key="PLAIN_TEXT" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="5543" />
+          <entry key="js" value="7372" />
           <entry key="json" value="1" />
-          <entry key="txt" value="1352" />
+          <entry key="txt" value="1585" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="1" />
-          <entry key="JavaScript" value="5543" />
-          <entry key="PLAIN_TEXT" value="1352" />
+          <entry key="JavaScript" value="7372" />
+          <entry key="PLAIN_TEXT" value="1585" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/clients.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="52" selection-start-line="12" selection-start-column="52" selection-end-line="12" selection-end-column="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/order.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" column="85" selection-start-line="28" selection-start-column="85" selection-end-line="28" selection-end-column="85" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/users.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="52" column="32" lean-forward="true" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="32" />
+            <state relative-caret-position="258">
+              <caret line="114" column="7" lean-forward="true" selection-start-line="114" selection-start-column="7" selection-end-line="114" selection-end-column="7" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/products.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="47" column="77" lean-forward="true" selection-start-line="47" selection-start-column="77" selection-end-line="47" selection-end-column="77" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/stores.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="16" column="39" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils/data.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="94" column="30" lean-forward="true" selection-start-line="94" selection-start-column="30" selection-end-line="94" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/reviews.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="16" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="16" />
+            <state relative-caret-position="405">
+              <caret line="27" column="49" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -145,8 +91,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="645">
-              <caret line="43" column="23" selection-start-line="43" selection-start-column="10" selection-end-line="43" selection-end-column="23" />
+            <state relative-caret-position="81">
+              <caret line="22" column="46" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -157,7 +103,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="feature-store" />
       </map>
     </option>
   </component>
@@ -169,12 +115,12 @@
         <option value="$PROJECT_DIR$/utils/pool.js" />
         <option value="$PROJECT_DIR$/routes/clients.js" />
         <option value="$PROJECT_DIR$/routes/stores.js" />
-        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/routes/reviews.js" />
         <option value="$PROJECT_DIR$/routes/order.js" />
-        <option value="$PROJECT_DIR$/routes/users.js" />
         <option value="$PROJECT_DIR$/utils/data.js" />
         <option value="$PROJECT_DIR$/routes/products.js" />
+        <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/routes/users.js" />
       </list>
     </option>
   </component>
@@ -202,11 +148,13 @@
     <option name="width" value="1440" />
     <option name="height" value="824" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -217,12 +165,12 @@
             <path>
               <item name="RELAY-API" type="b2602c69:ProjectViewProjectNode" />
               <item name="RELAY-API" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="RELAY-API" type="b2602c69:ProjectViewProjectNode" />
               <item name="RELAY-API" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="routes" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="RELAY-API" type="b2602c69:ProjectViewProjectNode" />
@@ -233,7 +181,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -482,18 +429,52 @@
       <option name="project" value="LOCAL" />
       <updated>1544649799347</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Create route to add new client">
+      <created>1545397078414</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1545397078414</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Make new client route send response.">
+      <created>1545397803149</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1545397803149</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Add route to create new store">
+      <created>1545398180501</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1545398180501</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Add route to create new deliverer">
+      <created>1545399058736</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1545399058736</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Add upload image module and update SQL queries.">
+      <created>1545402471660</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1545402471660</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59620000" />
+    <option name="totallyTimeSpent" value="70728000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="824" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16701902" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49899396" visible="true" weight="0.27131784" />
+      <window_info id="Structure" order="1" sideWeight="0.501006" side_tool="true" visible="true" weight="0.27131784" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -506,7 +487,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32103825" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32103825" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -539,11 +520,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Update create_user" />
-    <MESSAGE value="Dummy data generator for stores" />
-    <MESSAGE value="Add faker to dependencies" />
-    <MESSAGE value="Fix login router to decrypt and check password" />
-    <MESSAGE value="Create routes for dummy data generation" />
     <MESSAGE value="Create routes for faker store generation" />
     <MESSAGE value="Create routers to GET stores" />
     <MESSAGE value="Create routers to GET stores by type" />
@@ -564,7 +540,12 @@
     <MESSAGE value="Generate reference to order" />
     <MESSAGE value="Add route to get order listing by client" />
     <MESSAGE value="Change login router return type from json array to json object" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change login router return type from json array to json object" />
+    <MESSAGE value="Create route to add new client" />
+    <MESSAGE value="Make new client route send response." />
+    <MESSAGE value="Add route to create new store" />
+    <MESSAGE value="Add route to create new deliverer" />
+    <MESSAGE value="Add upload image module and update SQL queries." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add upload image module and update SQL queries." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/utils/database.js" />
@@ -586,66 +567,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/clients.js">
+    <entry file="file://$PROJECT_DIR$/utils/data.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="52" selection-start-line="12" selection-start-column="52" selection-end-line="12" selection-end-column="52" />
+        <state relative-caret-position="1410">
+          <caret line="94" column="30" selection-start-line="94" selection-start-column="30" selection-end-line="94" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/order.js">
+    <entry file="file://$PROJECT_DIR$/routes/clients.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="85" selection-start-line="28" selection-start-column="85" selection-end-line="28" selection-end-column="85" />
+        <state relative-caret-position="180">
+          <caret line="12" column="34" lean-forward="true" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/reviews.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
+        <state relative-caret-position="330">
+          <caret line="22" column="3" selection-start-line="22" selection-start-column="3" selection-end-line="22" selection-end-column="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="16" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="16" />
+        <state relative-caret-position="300">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="43" column="23" selection-start-line="43" selection-start-column="10" selection-end-line="43" selection-end-column="23" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/public/uploads/image-1545401376778.pan.jpg">
+      <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/users.js">
+    <entry file="file://$PROJECT_DIR$/routes/order.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="52" column="32" lean-forward="true" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/data.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="94" column="30" lean-forward="true" selection-start-line="94" selection-start-column="30" selection-end-line="94" selection-end-column="30" />
+        <state relative-caret-position="158">
+          <caret line="13" column="54" lean-forward="true" selection-start-line="13" selection-start-column="54" selection-end-line="13" selection-end-column="54" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/products.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="47" column="77" lean-forward="true" selection-start-line="47" selection-start-column="77" selection-end-line="47" selection-end-column="77" />
+        <state relative-caret-position="211">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/stores.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="16" column="39" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
+        <state relative-caret-position="405">
+          <caret line="27" column="49" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="22" column="46" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/users.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="114" column="7" lean-forward="true" selection-start-line="114" selection-start-column="7" selection-end-line="114" selection-end-column="7" />
         </state>
       </provider>
     </entry>
