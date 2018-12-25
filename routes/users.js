@@ -53,9 +53,9 @@ module.exports = upload;
 router.post('/create_client', upload.single('image'), (req, res) => {
     let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
     const queryString = "INSERT INTO user (first_name, last_name, mail, password, phone_number," +
-        " address, user_type, creation_date, image) VALUES (?,?,?,?,?,?,?,?,?)";
+        " address, user_type, creation_date) VALUES (?,?,?,?,?,?,?,?)";
     getConnection().query(queryString, [req.body.first_name, req.body.last_name, req.body.mail, password,
-        req.body.phone_number, req.body.address, 'CLIENT', new Date(), req.file.filename], (err, results) => {
+        req.body.phone_number, req.body.address, 'CLIENT', new Date()], (err, results) => {
         if (err) {
             console.log("Failed to insert new client: " + err);
             res.json({status: false, error: err});
