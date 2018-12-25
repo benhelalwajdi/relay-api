@@ -9,6 +9,8 @@ router.get('/', (req, res) => {
 
     const queryString = "SELECT * FROM user WHERE user_type = ?";
     getConnection().query(queryString, "STORE", (err, rows, fields) => {
+
+    });});
 /* GET Store listing by id. */
 router.get('/:id', (req, res) => {
     console.log("Fetching store by ID :"+ req.params.id);
