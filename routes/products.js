@@ -38,7 +38,7 @@ router.get('/:id', (req, res) => {
 router.get('/store/:id', (req, res) => {
     console.log("Fetching product by storeID :" + req.params.id);
 
-    const queryString = "SELECT * FROM product WHERE store_id = ?";
+    const queryString = "SELECT * FROM product WHERE store_id = ? ORDER BY id DESC";
     getConnection().query(queryString, [req.params.id], (err, rows, fields) => {
         if (err) {
             console.log("Failed to query for product by storeID " + err);
@@ -74,9 +74,10 @@ router.post('/upload',upload.single('profile'), function (req, res) {
         console.log('file received');
         console.log(req.file.filename);
         message = "Successfully! uploaded";
-        res.render('index',{message: message, status:'success'});
+        res.json({image: req.file.filename});
     }
 });
+
 
 /* ADD new product */
 router.post('/create_product', function (req, res){
@@ -87,16 +88,16 @@ router.post('/create_product', function (req, res){
         " , price : " + req.body.price + " , quantity :" + req.body.quantity + " , image : " + req.body.image +
         " and size :" + req.body.size + " ,");
     const queryString = "INSERT INTO product (name, description, price, quantity, image," +
-        "size, store_id) VALUES (?,?,?,?,\"https://www.magidglove.com/assets/item/hero/620_HERO.jpg\",?,?)";
+        "size, store_id) VALUES (?,?,?,?,?,?,?)";
     getConnection().query(queryString, [req.body.name, req.body.description, req.body.price, req.body.quantity,
-        req.body.size, req.body.store_id], (err, results, fields) => {
+       req.body.image, req.body.size, req.body.store_id], (err, results, fields) => {
         if (err) {
             console.log("Failed to insert new product: " + err);
             res.json({status: false, error: err});
         }
         console.log("Inserted a new product with id :" + results.insertId);
         res.json({status: true});
-    })
+    });
 });
 
 /* UPDATE product */
@@ -139,9 +140,9 @@ router.post('/delete_product', function (req, res){
 var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'root',
-    database: 'Relay',
-    port: '8889',
+    password: 'wbh52',
+    database: 'relay',
+    port: '3306',
     connectionLimit: 10
 });
 
