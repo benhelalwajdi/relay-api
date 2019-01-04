@@ -106,10 +106,10 @@ router.post('/update_product', function (req, res){
     console.log(req.body);
     console.log("update product to the store with ID : " + req.body.store_id);
     console.log("Product with name : " + req.body.name + " , description : " + req.body.description +
-        " , price : " + req.body.price + " , quantity :" + req.body.quantity + " , size :" + req.body.size + " ,");
+        " , price : " + req.body.price + " , quantity :" + req.body.quantity + " , size :" + req.body.size + " , image :"+ req.body.image);
     const queryString = "update product set name = ? , description = ? , price = ? , quantity = ? , " +
-        "size = ? where id = ?";
-    getConnection().query(queryString, [req.body.name, req.body.description, req.body.price, req.body.quantity,
+        "image = ? , size = ? where id = ?";
+    getConnection().query(queryString, [req.body.name, req.body.description, req.body.price, req.body.quantity,req.body.image,
         req.body.size,  req.body.id], (err, results, fields) => {
         if (err) {
             console.log("Failed to update product: " + err);
