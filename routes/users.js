@@ -117,18 +117,19 @@ router.post('/update_client', (req, res)=> {
 
 /* Update store */
 router.post('/update_store', (req, res)=> {
-    let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
-    const queryString = "UPDATE user SET store_name = ? , store_type = ? , mail = ? , password = ? , address = ?," +
-        " phone_number = ? WHERE id = ?";
-    getConnection().query(queryString, [req.body.store_name, req.body.store_type, req.body.mail, password,
-        req.body.address, req.body.phone_number, req.body.id], (err) => {
+    console.log("Product with name : " + req.body.name + " , description : " + req.body.description +
+        " , price : " + req.body.price + " , quantity :" + req.body.quantity + " , size :" + req.body.size + " , image :"+ req.body.image);
+    const queryString = "update user set store_name = ? , store_type = ? , mail = ? , address = ? , " +
+        "phone_number = ? , image = ? where id = ?";
+    getConnection().query(queryString, [req.body.store_name, req.body.store_type, req.body.mail, req.body.address,req.body.phone_number,
+        req.body.image,  req.body.id], (err, results, fields) => {
         if (err) {
             console.log("Failed to update store: " + err);
             res.json({status: false, error: err});
         }
-        console.log("Store updated successfully");
+        console.log("update a  store with id :" + req.body.id);
         res.json({status: true});
-    });
+    })
 });
 
 /* Update deliverer */

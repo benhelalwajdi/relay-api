@@ -9,7 +9,7 @@ var reference = generateReference();
 /* ADD new order */
 router.post('/add_order/', (req, res) => {
 
-    const queryString = "INSERT INTO orders (id_product, id_store, id_client, reference, date, state, quantity) VALUES (?,?,?,?,?,?,?)";
+    const queryString = "INSERT INTO `order` (id_product, id_store, id_client, reference, date, state, quantity) VALUES (?,?,?,?,?,?,?)";
     getConnection().query(queryString, [req.body.idProduct, req.body.idStore, req.body.idClient, reference,
             new Date(), "WAITING", req.body.quantity],
         (err, results, fields) => {
@@ -25,7 +25,7 @@ router.post('/add_order/', (req, res) => {
 /* GET order listing by client */
 router.get('/client/:id', (req, res) => {
     console.log("Fetching order by client :" + req.params.id);
-    const queryString = "SELECT * FROM orders WHERE id_client = ?  GROUP BY reference";
+    const queryString = "SELECT * FROM `order` WHERE id_client = ?  GROUP BY reference";
     getConnection().query(queryString, [ req.params.id], (err, rows, fields) => {
         if (err) {
             console.log("Failed to query for orders by client " + err);
@@ -39,7 +39,7 @@ router.get('/client/:id', (req, res) => {
 /* GET order listing by store */
 router.get('/store/:id', (req, res) => {
     console.log("Fetching order by store :" + req.params.id);
-    const queryString = "SELECT * FROM orders WHERE id_store = ?  GROUP BY reference";
+    const queryString = "SELECT * FROM `order`  WHERE id_store = ? ";
     getConnection().query(queryString, [ req.params.id], (err, rows, fields) => {
         if (err) {
             console.log("Failed to query for orders by store " + err);
@@ -53,7 +53,7 @@ router.get('/store/:id', (req, res) => {
 /* GET order listing by reference */
 router.get('/store/reference/:reference', (req, res) => {
     console.log("Fetching order by store :" + req.params.id);
-    const queryString = "SELECT * FROM orders WHERE reference = ?";
+    const queryString = "SELECT * FROM `order` WHERE reference = ?";
     getConnection().query(queryString, [req.params.reference], (err, rows, fields) => {
         if (err) {
             console.log("Failed to query for orders by reference " + err);
@@ -67,7 +67,7 @@ router.get('/store/reference/:reference', (req, res) => {
 /* GET order listing for stores by state */
 router.get('/store/:id/state/:state', (req, res) => {
     console.log("Fetching order for store by state :" + req.params.state);
-    const queryString = "SELECT * FROM orders WHERE id_store = ? AND state = ?";
+    const queryString = "SELECT * FROM `order` WHERE id_store = ? AND state = ?";
     getConnection().query(queryString, [req.params.id, req.params.state], (err, rows, fields) => {
         if (err) {
             console.log("Failed to query for orders by state " + err);
@@ -81,7 +81,7 @@ router.get('/store/:id/state/:state', (req, res) => {
 /* GET order listing for client by state */
 router.get('/client/:id/state/:state', (req, res) => {
     console.log("Fetching order for client by state :" + req.params.state);
-    const queryString = "SELECT * FROM orders WHERE id_client = ? AND state = ?";
+    const queryString = "SELECT * FROM `order`   WHERE id_client = ? AND state = ?";
     getConnection().query(queryString, [req.params.id, req.params.state], (err, rows, fields) => {
         if (err) {
             console.log("Failed to query for orders by state " + err);
