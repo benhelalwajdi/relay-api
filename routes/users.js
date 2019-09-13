@@ -121,7 +121,7 @@ router.post('/update_store', (req, res)=> {
         " , price : " + req.body.price + " , quantity :" + req.body.quantity + " , size :" + req.body.size + " , image :"+ req.body.image);
     const queryString = "update user set store_name = ? , store_type = ? , mail = ? , address = ? , " +
         "phone_number = ? , image = ? where id = ?";
-    getConnection().query(queryString, [req.body.store_name, req.body.store_type, req.body.mail, req.body.address,req.body.phone_number,
+    getConnection().query(queryString, [req.body.store_name, req.body.store_type, req.body.mail, req.body.address   ,req.body.phone_number,
         req.body.image,  req.body.id], (err, results, fields) => {
         if (err) {
             console.log("Failed to update store: " + err);
@@ -152,13 +152,14 @@ router.post('/update_deliverer', (req, res)=> {
 /* Delete account */
 
 var pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
-    database: 'Relay',
-    port: '8889',
+    host: '127.0.0.1',
+    user: 'relay',
+    password: 'relay',
+    database: 'relay',
+    port: '3306',
     connectionLimit: 10
 });
+
 
 function getConnection() {
     return pool;

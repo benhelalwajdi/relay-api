@@ -99,6 +99,7 @@ router.get('/client/:id/state/:state', (req, res) => {
 function generateReference(req, response) {
     return reference = crypto.randomBytes(5).toString('hex').toUpperCase();
 }
+
 var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',

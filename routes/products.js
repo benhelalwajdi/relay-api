@@ -137,6 +137,7 @@ router.post('/delete_product', function (req, res){
 });
 
 
+
 var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
@@ -145,7 +146,6 @@ var pool = mysql.createPool({
     port: '8889',
     connectionLimit: 10
 });
-
 function getConnection() {
     return pool;
 }

@@ -19,6 +19,7 @@ router.get('/', (req, res) => {
     })
 });
 
+
 var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
